@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "src/server-stream";
+
+message Image {
+  bytes data = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message Video {
+  repeated Image frame = 1;
+  int32 frequency = 2;
+}
+
+message MetaData {
+  string format = 1;
+}
+
+service VideoStreaming {
+  rpc upload(stream Video) returns (google.protobuf.Empty) {};
+  rpc shouldUpload(google.protobuf.Empty) returns (MetaData) {};
+}
