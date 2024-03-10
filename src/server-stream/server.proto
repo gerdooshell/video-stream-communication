@@ -11,13 +11,13 @@ message Image {
 }
 
 message Video {
-  repeated Image frame = 1;
+  repeated Image frames = 1;
   MetaData metaData = 2;
 }
 
 message MetaData {
   string requestId = 1;
-  bytes frequency = 2;
+  bytes frequencies = 2;
 }
 
 message VideoConfig {
