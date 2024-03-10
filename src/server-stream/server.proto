@@ -12,14 +12,20 @@ message Image {
 
 message Video {
   repeated Image frame = 1;
-  int32 frequency = 2;
+  MetaData metaData = 2;
 }
 
 message MetaData {
-  string format = 1;
+  string requestId = 1;
+  bytes frequency = 2;
+}
+
+message VideoConfig {
+  string requestId = 1;
+  string imageFormat = 2;
 }
 
 service VideoStreaming {
   rpc upload(stream Video) returns (google.protobuf.Empty) {};
-  rpc shouldUpload(google.protobuf.Empty) returns (MetaData) {};
+  rpc getUploadConfig(google.protobuf.Empty) returns (VideoConfig) {};
 }
