@@ -246,6 +246,100 @@ func (x *VideoConfig) GetImageFormat() string {
 	return ""
 }
 
+type VideoStopRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	RequestId string `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
+}
+
+func (x *VideoStopRequest) Reset() {
+	*x = VideoStopRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_src_server_stream_server_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *VideoStopRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoStopRequest) ProtoMessage() {}
+
+func (x *VideoStopRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_src_server_stream_server_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoStopRequest.ProtoReflect.Descriptor instead.
+func (*VideoStopRequest) Descriptor() ([]byte, []int) {
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *VideoStopRequest) GetRequestId() string {
+	if x != nil {
+		return x.RequestId
+	}
+	return ""
+}
+
+type VideoStopResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IsStopped bool `protobuf:"varint,1,opt,name=isStopped,proto3" json:"isStopped,omitempty"`
+}
+
+func (x *VideoStopResponse) Reset() {
+	*x = VideoStopResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_src_server_stream_server_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *VideoStopResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VideoStopResponse) ProtoMessage() {}
+
+func (x *VideoStopResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_src_server_stream_server_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VideoStopResponse.ProtoReflect.Descriptor instead.
+func (*VideoStopResponse) Descriptor() ([]byte, []int) {
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *VideoStopResponse) GetIsStopped() bool {
+	if x != nil {
+		return x.IsStopped
+	}
+	return false
+}
+
 var File_src_server_stream_server_proto protoreflect.FileDescriptor
 
 var file_src_server_stream_server_proto_rawDesc = []byte{
@@ -275,16 +369,27 @@ var file_src_server_stream_server_proto_rawDesc = []byte{
 	0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12, 0x20,
 	0x0a, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74,
-	0x32, 0x79, 0x0a, 0x0e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69,
-	0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x06, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x06, 0x2e, 0x56,
-	0x69, 0x64, 0x65, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x28, 0x01,
-	0x12, 0x39, 0x0a, 0x0f, 0x67, 0x65, 0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x43, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a, 0x0c, 0x2e, 0x56, 0x69,
-	0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0x00, 0x42, 0x13, 0x5a, 0x11, 0x73,
-	0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x22, 0x30, 0x0a, 0x10, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x49, 0x64, 0x22, 0x31, 0x0a, 0x11, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x73, 0x53, 0x74, 0x6f,
+	0x70, 0x70, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x69, 0x73, 0x53, 0x74,
+	0x6f, 0x70, 0x70, 0x65, 0x64, 0x32, 0x3e, 0x0a, 0x0e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x06, 0x75, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x12, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74,
+	0x79, 0x22, 0x00, 0x28, 0x01, 0x32, 0x7f, 0x0a, 0x0f, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x35, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72,
+	0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43,
+	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12,
+	0x35, 0x0a, 0x0a, 0x73, 0x74, 0x6f, 0x70, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x11, 0x2e,
+	0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x12, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x13, 0x5a, 0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65,
+	0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -299,25 +404,29 @@ func file_src_server_stream_server_proto_rawDescGZIP() []byte {
 	return file_src_server_stream_server_proto_rawDescData
 }
 
-var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_src_server_stream_server_proto_goTypes = []interface{}{
 	(*Image)(nil),                 // 0: Image
 	(*Video)(nil),                 // 1: Video
 	(*MetaData)(nil),              // 2: MetaData
 	(*VideoConfig)(nil),           // 3: VideoConfig
-	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
+	(*VideoStopRequest)(nil),      // 4: VideoStopRequest
+	(*VideoStopResponse)(nil),     // 5: VideoStopResponse
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 7: google.protobuf.Empty
 }
 var file_src_server_stream_server_proto_depIdxs = []int32{
-	4, // 0: Image.timestamp:type_name -> google.protobuf.Timestamp
+	6, // 0: Image.timestamp:type_name -> google.protobuf.Timestamp
 	0, // 1: Video.frames:type_name -> Image
 	2, // 2: Video.metaData:type_name -> MetaData
 	1, // 3: VideoStreaming.upload:input_type -> Video
-	5, // 4: VideoStreaming.getUploadConfig:input_type -> google.protobuf.Empty
-	5, // 5: VideoStreaming.upload:output_type -> google.protobuf.Empty
-	3, // 6: VideoStreaming.getUploadConfig:output_type -> VideoConfig
-	5, // [5:7] is the sub-list for method output_type
-	3, // [3:5] is the sub-list for method input_type
+	3, // 4: VideoRequesting.startUpload:input_type -> VideoConfig
+	4, // 5: VideoRequesting.stopUpload:input_type -> VideoStopRequest
+	7, // 6: VideoStreaming.upload:output_type -> google.protobuf.Empty
+	7, // 7: VideoRequesting.startUpload:output_type -> google.protobuf.Empty
+	5, // 8: VideoRequesting.stopUpload:output_type -> VideoStopResponse
+	6, // [6:9] is the sub-list for method output_type
+	3, // [3:6] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -377,6 +486,30 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
+		file_src_server_stream_server_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoStopRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_src_server_stream_server_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*VideoStopResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -384,9 +517,9 @@ func file_src_server_stream_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_src_server_stream_server_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_src_server_stream_server_proto_goTypes,
 		DependencyIndexes: file_src_server_stream_server_proto_depIdxs,
@@ -411,7 +544,6 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VideoStreamingClient interface {
 	Upload(ctx context.Context, opts ...grpc.CallOption) (VideoStreaming_UploadClient, error)
-	GetUploadConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*VideoConfig, error)
 }
 
 type videoStreamingClient struct {
@@ -456,19 +588,9 @@ func (x *videoStreamingUploadClient) CloseAndRecv() (*emptypb.Empty, error) {
 	return m, nil
 }
 
-func (c *videoStreamingClient) GetUploadConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*VideoConfig, error) {
-	out := new(VideoConfig)
-	err := c.cc.Invoke(ctx, "/VideoStreaming/getUploadConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // VideoStreamingServer is the server API for VideoStreaming service.
 type VideoStreamingServer interface {
 	Upload(VideoStreaming_UploadServer) error
-	GetUploadConfig(context.Context, *emptypb.Empty) (*VideoConfig, error)
 }
 
 // UnimplementedVideoStreamingServer can be embedded to have forward compatible implementations.
@@ -477,9 +599,6 @@ type UnimplementedVideoStreamingServer struct {
 
 func (*UnimplementedVideoStreamingServer) Upload(VideoStreaming_UploadServer) error {
 	return status.Errorf(codes.Unimplemented, "method Upload not implemented")
-}
-func (*UnimplementedVideoStreamingServer) GetUploadConfig(context.Context, *emptypb.Empty) (*VideoConfig, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetUploadConfig not implemented")
 }
 
 func RegisterVideoStreamingServer(s *grpc.Server, srv VideoStreamingServer) {
@@ -512,33 +631,10 @@ func (x *videoStreamingUploadServer) Recv() (*Video, error) {
 	return m, nil
 }
 
-func _VideoStreaming_GetUploadConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoStreamingServer).GetUploadConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/VideoStreaming/GetUploadConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoStreamingServer).GetUploadConfig(ctx, req.(*emptypb.Empty))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var _VideoStreaming_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "VideoStreaming",
 	HandlerType: (*VideoStreamingServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "getUploadConfig",
-			Handler:    _VideoStreaming_GetUploadConfig_Handler,
-		},
-	},
+	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "upload",
@@ -546,5 +642,113 @@ var _VideoStreaming_serviceDesc = grpc.ServiceDesc{
 			ClientStreams: true,
 		},
 	},
+	Metadata: "src/server-stream/server.proto",
+}
+
+// VideoRequestingClient is the client API for VideoRequesting service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
+type VideoRequestingClient interface {
+	StartUpload(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*VideoStopResponse, error)
+}
+
+type videoRequestingClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewVideoRequestingClient(cc grpc.ClientConnInterface) VideoRequestingClient {
+	return &videoRequestingClient{cc}
+}
+
+func (c *videoRequestingClient) StartUpload(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/VideoRequesting/startUpload", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *videoRequestingClient) StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*VideoStopResponse, error) {
+	out := new(VideoStopResponse)
+	err := c.cc.Invoke(ctx, "/VideoRequesting/stopUpload", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// VideoRequestingServer is the server API for VideoRequesting service.
+type VideoRequestingServer interface {
+	StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error)
+	StopUpload(context.Context, *VideoStopRequest) (*VideoStopResponse, error)
+}
+
+// UnimplementedVideoRequestingServer can be embedded to have forward compatible implementations.
+type UnimplementedVideoRequestingServer struct {
+}
+
+func (*UnimplementedVideoRequestingServer) StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartUpload not implemented")
+}
+func (*UnimplementedVideoRequestingServer) StopUpload(context.Context, *VideoStopRequest) (*VideoStopResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopUpload not implemented")
+}
+
+func RegisterVideoRequestingServer(s *grpc.Server, srv VideoRequestingServer) {
+	s.RegisterService(&_VideoRequesting_serviceDesc, srv)
+}
+
+func _VideoRequesting_StartUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VideoConfig)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoRequestingServer).StartUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/VideoRequesting/StartUpload",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoRequestingServer).StartUpload(ctx, req.(*VideoConfig))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _VideoRequesting_StopUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VideoStopRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VideoRequestingServer).StopUpload(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/VideoRequesting/StopUpload",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VideoRequestingServer).StopUpload(ctx, req.(*VideoStopRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+var _VideoRequesting_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "VideoRequesting",
+	HandlerType: (*VideoRequestingServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "startUpload",
+			Handler:    _VideoRequesting_StartUpload_Handler,
+		},
+		{
+			MethodName: "stopUpload",
+			Handler:    _VideoRequesting_StopUpload_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "src/server-stream/server.proto",
 }

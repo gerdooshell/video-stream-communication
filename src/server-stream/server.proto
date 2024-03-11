@@ -25,7 +25,19 @@ message VideoConfig {
   string imageFormat = 2;
 }
 
+message VideoStopRequest {
+  string requestId = 1;
+}
+
+message VideoStopResponse {
+  bool isStopped = 1;
+}
+
 service VideoStreaming {
   rpc upload(stream Video) returns (google.protobuf.Empty) {};
-  rpc getUploadConfig(google.protobuf.Empty) returns (VideoConfig) {};
+}
+
+service VideoRequesting {
+  rpc startUpload(VideoConfig) returns (google.protobuf.Empty) {};
+  rpc stopUpload(VideoStopRequest) returns (VideoStopResponse) {};
 }
