@@ -29,6 +29,10 @@ message VideoStopRequest {
   string requestId = 1;
 }
 
+message VideoKeepAliveRequest {
+  string requestId = 1;
+}
+
 message VideoStopResponse {
   bool isStopped = 1;
 }
@@ -39,5 +43,6 @@ service VideoStreaming {
 
 service VideoRequesting {
   rpc startUpload(VideoConfig) returns (google.protobuf.Empty) {};
+  rpc keepAlive(VideoKeepAliveRequest) returns (google.protobuf.Empty) {};
   rpc stopUpload(VideoStopRequest) returns (VideoStopResponse) {};
 }
