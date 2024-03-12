@@ -26,74 +26,19 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type Image struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Data      []byte                 `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
-	Timestamp *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-}
-
-func (x *Image) Reset() {
-	*x = Image{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[0]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *Image) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*Image) ProtoMessage() {}
-
-func (x *Image) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[0]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use Image.ProtoReflect.Descriptor instead.
-func (*Image) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *Image) GetData() []byte {
-	if x != nil {
-		return x.Data
-	}
-	return nil
-}
-
-func (x *Image) GetTimestamp() *timestamppb.Timestamp {
-	if x != nil {
-		return x.Timestamp
-	}
-	return nil
-}
-
 type Video struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Frames   []*Image  `protobuf:"bytes,1,rep,name=frames,proto3" json:"frames,omitempty"`
+	Frame    []byte    `protobuf:"bytes,1,opt,name=frame,proto3" json:"frame,omitempty"`
 	MetaData *MetaData `protobuf:"bytes,2,opt,name=metaData,proto3" json:"metaData,omitempty"`
 }
 
 func (x *Video) Reset() {
 	*x = Video{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[1]
+		mi := &file_src_server_stream_server_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -106,7 +51,7 @@ func (x *Video) String() string {
 func (*Video) ProtoMessage() {}
 
 func (x *Video) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[1]
+	mi := &file_src_server_stream_server_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -119,12 +64,12 @@ func (x *Video) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Video.ProtoReflect.Descriptor instead.
 func (*Video) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{1}
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *Video) GetFrames() []*Image {
+func (x *Video) GetFrame() []byte {
 	if x != nil {
-		return x.Frames
+		return x.Frame
 	}
 	return nil
 }
@@ -141,14 +86,18 @@ type MetaData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	RequestId   string `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
-	Frequencies []byte `protobuf:"bytes,2,opt,name=frequencies,proto3" json:"frequencies,omitempty"`
+	Frequency int32 `protobuf:"varint,1,opt,name=frequency,proto3" json:"frequency,omitempty"`
+	// Types that are assignable to StartTime:
+	//
+	//	*MetaData_Seconds
+	//	*MetaData_Timestamp
+	StartTime isMetaData_StartTime `protobuf_oneof:"startTime"`
 }
 
 func (x *MetaData) Reset() {
 	*x = MetaData{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[2]
+		mi := &file_src_server_stream_server_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -161,7 +110,7 @@ func (x *MetaData) String() string {
 func (*MetaData) ProtoMessage() {}
 
 func (x *MetaData) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[2]
+	mi := &file_src_server_stream_server_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -174,22 +123,52 @@ func (x *MetaData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MetaData.ProtoReflect.Descriptor instead.
 func (*MetaData) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{2}
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *MetaData) GetRequestId() string {
+func (x *MetaData) GetFrequency() int32 {
 	if x != nil {
-		return x.RequestId
+		return x.Frequency
 	}
-	return ""
+	return 0
 }
 
-func (x *MetaData) GetFrequencies() []byte {
-	if x != nil {
-		return x.Frequencies
+func (m *MetaData) GetStartTime() isMetaData_StartTime {
+	if m != nil {
+		return m.StartTime
 	}
 	return nil
 }
+
+func (x *MetaData) GetSeconds() int32 {
+	if x, ok := x.GetStartTime().(*MetaData_Seconds); ok {
+		return x.Seconds
+	}
+	return 0
+}
+
+func (x *MetaData) GetTimestamp() *timestamppb.Timestamp {
+	if x, ok := x.GetStartTime().(*MetaData_Timestamp); ok {
+		return x.Timestamp
+	}
+	return nil
+}
+
+type isMetaData_StartTime interface {
+	isMetaData_StartTime()
+}
+
+type MetaData_Seconds struct {
+	Seconds int32 `protobuf:"varint,4,opt,name=seconds,proto3,oneof"`
+}
+
+type MetaData_Timestamp struct {
+	Timestamp *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3,oneof"`
+}
+
+func (*MetaData_Seconds) isMetaData_StartTime() {}
+
+func (*MetaData_Timestamp) isMetaData_StartTime() {}
 
 type VideoConfig struct {
 	state         protoimpl.MessageState
@@ -198,12 +177,18 @@ type VideoConfig struct {
 
 	RequestId   string `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
 	ImageFormat string `protobuf:"bytes,2,opt,name=imageFormat,proto3" json:"imageFormat,omitempty"`
+	Resolution  int32  `protobuf:"varint,3,opt,name=resolution,proto3" json:"resolution,omitempty"`
+	// Types that are assignable to StartTime:
+	//
+	//	*VideoConfig_Seconds
+	//	*VideoConfig_Timestamp
+	StartTime isVideoConfig_StartTime `protobuf_oneof:"startTime"`
 }
 
 func (x *VideoConfig) Reset() {
 	*x = VideoConfig{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[3]
+		mi := &file_src_server_stream_server_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -216,7 +201,7 @@ func (x *VideoConfig) String() string {
 func (*VideoConfig) ProtoMessage() {}
 
 func (x *VideoConfig) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[3]
+	mi := &file_src_server_stream_server_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -229,7 +214,7 @@ func (x *VideoConfig) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VideoConfig.ProtoReflect.Descriptor instead.
 func (*VideoConfig) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{3}
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *VideoConfig) GetRequestId() string {
@@ -246,6 +231,50 @@ func (x *VideoConfig) GetImageFormat() string {
 	return ""
 }
 
+func (x *VideoConfig) GetResolution() int32 {
+	if x != nil {
+		return x.Resolution
+	}
+	return 0
+}
+
+func (m *VideoConfig) GetStartTime() isVideoConfig_StartTime {
+	if m != nil {
+		return m.StartTime
+	}
+	return nil
+}
+
+func (x *VideoConfig) GetSeconds() int32 {
+	if x, ok := x.GetStartTime().(*VideoConfig_Seconds); ok {
+		return x.Seconds
+	}
+	return 0
+}
+
+func (x *VideoConfig) GetTimestamp() *timestamppb.Timestamp {
+	if x, ok := x.GetStartTime().(*VideoConfig_Timestamp); ok {
+		return x.Timestamp
+	}
+	return nil
+}
+
+type isVideoConfig_StartTime interface {
+	isVideoConfig_StartTime()
+}
+
+type VideoConfig_Seconds struct {
+	Seconds int32 `protobuf:"varint,4,opt,name=seconds,proto3,oneof"`
+}
+
+type VideoConfig_Timestamp struct {
+	Timestamp *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=timestamp,proto3,oneof"`
+}
+
+func (*VideoConfig_Seconds) isVideoConfig_StartTime() {}
+
+func (*VideoConfig_Timestamp) isVideoConfig_StartTime() {}
+
 type VideoStopRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -257,7 +286,7 @@ type VideoStopRequest struct {
 func (x *VideoStopRequest) Reset() {
 	*x = VideoStopRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[4]
+		mi := &file_src_server_stream_server_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -270,7 +299,7 @@ func (x *VideoStopRequest) String() string {
 func (*VideoStopRequest) ProtoMessage() {}
 
 func (x *VideoStopRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[4]
+	mi := &file_src_server_stream_server_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -283,7 +312,7 @@ func (x *VideoStopRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VideoStopRequest.ProtoReflect.Descriptor instead.
 func (*VideoStopRequest) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{4}
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *VideoStopRequest) GetRequestId() string {
@@ -304,7 +333,7 @@ type VideoKeepAliveRequest struct {
 func (x *VideoKeepAliveRequest) Reset() {
 	*x = VideoKeepAliveRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[5]
+		mi := &file_src_server_stream_server_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -317,7 +346,7 @@ func (x *VideoKeepAliveRequest) String() string {
 func (*VideoKeepAliveRequest) ProtoMessage() {}
 
 func (x *VideoKeepAliveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[5]
+	mi := &file_src_server_stream_server_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -330,7 +359,7 @@ func (x *VideoKeepAliveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VideoKeepAliveRequest.ProtoReflect.Descriptor instead.
 func (*VideoKeepAliveRequest) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{5}
+	return file_src_server_stream_server_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *VideoKeepAliveRequest) GetRequestId() string {
@@ -338,53 +367,6 @@ func (x *VideoKeepAliveRequest) GetRequestId() string {
 		return x.RequestId
 	}
 	return ""
-}
-
-type VideoStopResponse struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	IsStopped bool `protobuf:"varint,1,opt,name=isStopped,proto3" json:"isStopped,omitempty"`
-}
-
-func (x *VideoStopResponse) Reset() {
-	*x = VideoStopResponse{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[6]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *VideoStopResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*VideoStopResponse) ProtoMessage() {}
-
-func (x *VideoStopResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[6]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use VideoStopResponse.ProtoReflect.Descriptor instead.
-func (*VideoStopResponse) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{6}
-}
-
-func (x *VideoStopResponse) GetIsStopped() bool {
-	if x != nil {
-		return x.IsStopped
-	}
-	return false
 }
 
 var File_src_server_stream_server_proto protoreflect.FileDescriptor
@@ -395,55 +377,61 @@ var file_src_server_stream_server_proto_rawDesc = []byte{
 	0x1a, 0x1f, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2f, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x55,
-	0x0a, 0x05, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x12, 0x38, 0x0a, 0x09, 0x74,
-	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
+	0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x44,
+	0x0a, 0x05, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x12, 0x14, 0x0a, 0x05, 0x66, 0x72, 0x61, 0x6d, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0c, 0x52, 0x05, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a,
+	0x08, 0x6d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x09, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61,
+	0x44, 0x61, 0x74, 0x61, 0x22, 0x8d, 0x01, 0x0a, 0x08, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74,
+	0x61, 0x12, 0x1c, 0x0a, 0x09, 0x66, 0x72, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x79, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x05, 0x52, 0x09, 0x66, 0x72, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x79, 0x12,
+	0x1a, 0x0a, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x05,
+	0x48, 0x00, 0x52, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x12, 0x3a, 0x0a, 0x09, 0x74,
+	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
-	0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65,
-	0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x4e, 0x0a, 0x05, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x12, 0x1e,
-	0x0a, 0x06, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x06,
-	0x2e, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x52, 0x06, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x73, 0x12, 0x25,
-	0x0a, 0x08, 0x6d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x09, 0x2e, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74,
-	0x61, 0x44, 0x61, 0x74, 0x61, 0x22, 0x4a, 0x0a, 0x08, 0x4d, 0x65, 0x74, 0x61, 0x44, 0x61, 0x74,
-	0x61, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12,
-	0x20, 0x0a, 0x0b, 0x66, 0x72, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x69, 0x65, 0x73, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x0c, 0x52, 0x0b, 0x66, 0x72, 0x65, 0x71, 0x75, 0x65, 0x6e, 0x63, 0x69, 0x65,
-	0x73, 0x22, 0x4d, 0x0a, 0x0b, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
-	0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x12, 0x20,
-	0x0a, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74,
-	0x22, 0x30, 0x0a, 0x10, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71,
+	0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x48, 0x00, 0x52, 0x09, 0x74, 0x69,
+	0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x0b, 0x0a, 0x09, 0x73, 0x74, 0x61, 0x72, 0x74,
+	0x54, 0x69, 0x6d, 0x65, 0x22, 0xd2, 0x01, 0x0a, 0x0b, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49,
+	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61,
+	0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x46, 0x6f,
+	0x72, 0x6d, 0x61, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x72, 0x65, 0x73, 0x6f, 0x6c, 0x75, 0x74, 0x69,
+	0x6f, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0a, 0x72, 0x65, 0x73, 0x6f, 0x6c, 0x75,
+	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x1a, 0x0a, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73, 0x18,
+	0x04, 0x20, 0x01, 0x28, 0x05, 0x48, 0x00, 0x52, 0x07, 0x73, 0x65, 0x63, 0x6f, 0x6e, 0x64, 0x73,
+	0x12, 0x3a, 0x0a, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x05, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x48,
+	0x00, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x0b, 0x0a, 0x09,
+	0x73, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x30, 0x0a, 0x10, 0x56, 0x69, 0x64,
+	0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a,
+	0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x22, 0x35, 0x0a, 0x15, 0x56,
+	0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x49, 0x64, 0x22, 0x35, 0x0a, 0x15, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70, 0x41,
-	0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x72,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
-	0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x22, 0x31, 0x0a, 0x11, 0x56, 0x69, 0x64,
-	0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1c,
-	0x0a, 0x09, 0x69, 0x73, 0x53, 0x74, 0x6f, 0x70, 0x70, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x08, 0x52, 0x09, 0x69, 0x73, 0x53, 0x74, 0x6f, 0x70, 0x70, 0x65, 0x64, 0x32, 0x3e, 0x0a, 0x0e,
-	0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x12, 0x2c,
-	0x0a, 0x06, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f,
-	0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x28, 0x01, 0x32, 0xbe, 0x01, 0x0a,
-	0x0f, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67,
-	0x12, 0x35, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12,
-	0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x16, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x3d, 0x0a, 0x09, 0x6b, 0x65, 0x65, 0x70, 0x41,
-	0x6c, 0x69, 0x76, 0x65, 0x12, 0x16, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70,
-	0x41, 0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
-	0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x35, 0x0a, 0x0a, 0x73, 0x74, 0x6f, 0x70, 0x55, 0x70,
-	0x6c, 0x6f, 0x61, 0x64, 0x12, 0x11, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x12, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53,
-	0x74, 0x6f, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x13, 0x5a,
-	0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74, 0x72, 0x65,
-	0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x49, 0x64, 0x32, 0x3e, 0x0a, 0x0e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x69, 0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x06, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x06,
+	0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00,
+	0x28, 0x01, 0x32, 0xea, 0x01, 0x0a, 0x0f, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x35, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x55,
+	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e,
+	0x66, 0x69, 0x67, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x26, 0x0a,
+	0x08, 0x64, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65,
+	0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x22,
+	0x00, 0x28, 0x01, 0x30, 0x01, 0x12, 0x3d, 0x0a, 0x09, 0x6b, 0x65, 0x65, 0x70, 0x41, 0x6c, 0x69,
+	0x76, 0x65, 0x12, 0x16, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70, 0x41, 0x6c,
+	0x69, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
+	0x74, 0x79, 0x22, 0x00, 0x12, 0x39, 0x0a, 0x0a, 0x73, 0x74, 0x6f, 0x70, 0x55, 0x70, 0x6c, 0x6f,
+	0x61, 0x64, 0x12, 0x11, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x42,
+	0x13, 0x5a, 0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -458,32 +446,32 @@ func file_src_server_stream_server_proto_rawDescGZIP() []byte {
 	return file_src_server_stream_server_proto_rawDescData
 }
 
-var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
+var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_src_server_stream_server_proto_goTypes = []interface{}{
-	(*Image)(nil),                 // 0: Image
-	(*Video)(nil),                 // 1: Video
-	(*MetaData)(nil),              // 2: MetaData
-	(*VideoConfig)(nil),           // 3: VideoConfig
-	(*VideoStopRequest)(nil),      // 4: VideoStopRequest
-	(*VideoKeepAliveRequest)(nil), // 5: VideoKeepAliveRequest
-	(*VideoStopResponse)(nil),     // 6: VideoStopResponse
-	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 8: google.protobuf.Empty
+	(*Video)(nil),                 // 0: Video
+	(*MetaData)(nil),              // 1: MetaData
+	(*VideoConfig)(nil),           // 2: VideoConfig
+	(*VideoStopRequest)(nil),      // 3: VideoStopRequest
+	(*VideoKeepAliveRequest)(nil), // 4: VideoKeepAliveRequest
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
 }
 var file_src_server_stream_server_proto_depIdxs = []int32{
-	7, // 0: Image.timestamp:type_name -> google.protobuf.Timestamp
-	0, // 1: Video.frames:type_name -> Image
-	2, // 2: Video.metaData:type_name -> MetaData
-	1, // 3: VideoStreaming.upload:input_type -> Video
-	3, // 4: VideoRequesting.startUpload:input_type -> VideoConfig
-	5, // 5: VideoRequesting.keepAlive:input_type -> VideoKeepAliveRequest
-	4, // 6: VideoRequesting.stopUpload:input_type -> VideoStopRequest
-	8, // 7: VideoStreaming.upload:output_type -> google.protobuf.Empty
-	8, // 8: VideoRequesting.startUpload:output_type -> google.protobuf.Empty
-	8, // 9: VideoRequesting.keepAlive:output_type -> google.protobuf.Empty
-	6, // 10: VideoRequesting.stopUpload:output_type -> VideoStopResponse
-	7, // [7:11] is the sub-list for method output_type
-	3, // [3:7] is the sub-list for method input_type
+	1, // 0: Video.metaData:type_name -> MetaData
+	5, // 1: MetaData.timestamp:type_name -> google.protobuf.Timestamp
+	5, // 2: VideoConfig.timestamp:type_name -> google.protobuf.Timestamp
+	0, // 3: VideoStreaming.upload:input_type -> Video
+	2, // 4: VideoRequesting.startUpload:input_type -> VideoConfig
+	2, // 5: VideoRequesting.download:input_type -> VideoConfig
+	4, // 6: VideoRequesting.keepAlive:input_type -> VideoKeepAliveRequest
+	3, // 7: VideoRequesting.stopUpload:input_type -> VideoStopRequest
+	6, // 8: VideoStreaming.upload:output_type -> google.protobuf.Empty
+	6, // 9: VideoRequesting.startUpload:output_type -> google.protobuf.Empty
+	0, // 10: VideoRequesting.download:output_type -> Video
+	6, // 11: VideoRequesting.keepAlive:output_type -> google.protobuf.Empty
+	6, // 12: VideoRequesting.stopUpload:output_type -> google.protobuf.Empty
+	8, // [8:13] is the sub-list for method output_type
+	3, // [3:8] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -496,18 +484,6 @@ func file_src_server_stream_server_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_src_server_stream_server_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Image); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_src_server_stream_server_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Video); i {
 			case 0:
 				return &v.state
@@ -519,7 +495,7 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_src_server_stream_server_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*MetaData); i {
 			case 0:
 				return &v.state
@@ -531,7 +507,7 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_src_server_stream_server_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VideoConfig); i {
 			case 0:
 				return &v.state
@@ -543,7 +519,7 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_src_server_stream_server_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VideoStopRequest); i {
 			case 0:
 				return &v.state
@@ -555,7 +531,7 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_src_server_stream_server_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*VideoKeepAliveRequest); i {
 			case 0:
 				return &v.state
@@ -567,18 +543,14 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VideoStopResponse); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
+	}
+	file_src_server_stream_server_proto_msgTypes[1].OneofWrappers = []interface{}{
+		(*MetaData_Seconds)(nil),
+		(*MetaData_Timestamp)(nil),
+	}
+	file_src_server_stream_server_proto_msgTypes[2].OneofWrappers = []interface{}{
+		(*VideoConfig_Seconds)(nil),
+		(*VideoConfig_Timestamp)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -586,7 +558,7 @@ func file_src_server_stream_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_src_server_stream_server_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   7,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
@@ -719,8 +691,9 @@ var _VideoStreaming_serviceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VideoRequestingClient interface {
 	StartUpload(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Download(ctx context.Context, opts ...grpc.CallOption) (VideoRequesting_DownloadClient, error)
 	KeepAlive(ctx context.Context, in *VideoKeepAliveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*VideoStopResponse, error)
+	StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type videoRequestingClient struct {
@@ -740,6 +713,37 @@ func (c *videoRequestingClient) StartUpload(ctx context.Context, in *VideoConfig
 	return out, nil
 }
 
+func (c *videoRequestingClient) Download(ctx context.Context, opts ...grpc.CallOption) (VideoRequesting_DownloadClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_VideoRequesting_serviceDesc.Streams[0], "/VideoRequesting/download", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &videoRequestingDownloadClient{stream}
+	return x, nil
+}
+
+type VideoRequesting_DownloadClient interface {
+	Send(*VideoConfig) error
+	Recv() (*Video, error)
+	grpc.ClientStream
+}
+
+type videoRequestingDownloadClient struct {
+	grpc.ClientStream
+}
+
+func (x *videoRequestingDownloadClient) Send(m *VideoConfig) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *videoRequestingDownloadClient) Recv() (*Video, error) {
+	m := new(Video)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *videoRequestingClient) KeepAlive(ctx context.Context, in *VideoKeepAliveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/VideoRequesting/keepAlive", in, out, opts...)
@@ -749,8 +753,8 @@ func (c *videoRequestingClient) KeepAlive(ctx context.Context, in *VideoKeepAliv
 	return out, nil
 }
 
-func (c *videoRequestingClient) StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*VideoStopResponse, error) {
-	out := new(VideoStopResponse)
+func (c *videoRequestingClient) StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/VideoRequesting/stopUpload", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -761,8 +765,9 @@ func (c *videoRequestingClient) StopUpload(ctx context.Context, in *VideoStopReq
 // VideoRequestingServer is the server API for VideoRequesting service.
 type VideoRequestingServer interface {
 	StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error)
+	Download(VideoRequesting_DownloadServer) error
 	KeepAlive(context.Context, *VideoKeepAliveRequest) (*emptypb.Empty, error)
-	StopUpload(context.Context, *VideoStopRequest) (*VideoStopResponse, error)
+	StopUpload(context.Context, *VideoStopRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedVideoRequestingServer can be embedded to have forward compatible implementations.
@@ -772,10 +777,13 @@ type UnimplementedVideoRequestingServer struct {
 func (*UnimplementedVideoRequestingServer) StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartUpload not implemented")
 }
+func (*UnimplementedVideoRequestingServer) Download(VideoRequesting_DownloadServer) error {
+	return status.Errorf(codes.Unimplemented, "method Download not implemented")
+}
 func (*UnimplementedVideoRequestingServer) KeepAlive(context.Context, *VideoKeepAliveRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method KeepAlive not implemented")
 }
-func (*UnimplementedVideoRequestingServer) StopUpload(context.Context, *VideoStopRequest) (*VideoStopResponse, error) {
+func (*UnimplementedVideoRequestingServer) StopUpload(context.Context, *VideoStopRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StopUpload not implemented")
 }
 
@@ -799,6 +807,32 @@ func _VideoRequesting_StartUpload_Handler(srv interface{}, ctx context.Context, 
 		return srv.(VideoRequestingServer).StartUpload(ctx, req.(*VideoConfig))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _VideoRequesting_Download_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(VideoRequestingServer).Download(&videoRequestingDownloadServer{stream})
+}
+
+type VideoRequesting_DownloadServer interface {
+	Send(*Video) error
+	Recv() (*VideoConfig, error)
+	grpc.ServerStream
+}
+
+type videoRequestingDownloadServer struct {
+	grpc.ServerStream
+}
+
+func (x *videoRequestingDownloadServer) Send(m *Video) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *videoRequestingDownloadServer) Recv() (*VideoConfig, error) {
+	m := new(VideoConfig)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func _VideoRequesting_KeepAlive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -854,6 +888,13 @@ var _VideoRequesting_serviceDesc = grpc.ServiceDesc{
 			Handler:    _VideoRequesting_StopUpload_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "download",
+			Handler:       _VideoRequesting_Download_Handler,
+			ServerStreams: true,
+			ClientStreams: true,
+		},
+	},
 	Metadata: "src/server-stream/server.proto",
 }

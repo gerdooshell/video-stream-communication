@@ -5,24 +5,27 @@ import "google/protobuf/empty.proto";
 
 option go_package = "src/server-stream";
 
-message Image {
-  bytes data = 1;
-  google.protobuf.Timestamp timestamp = 2;
-}
-
 message Video {
-  repeated Image frames = 1;
+  bytes frame = 1;
   MetaData metaData = 2;
 }
 
 message MetaData {
-  string requestId = 1;
-  bytes frequencies = 2;
+  int32 frequency = 1;
+  oneof startTime {
+    int32 seconds = 4;
+    google.protobuf.Timestamp timestamp = 5;
+  }
 }
 
 message VideoConfig {
   string requestId = 1;
   string imageFormat = 2;
+  int32 resolution = 3;
+  oneof startTime {
+    int32 seconds = 4;
+    google.protobuf.Timestamp timestamp = 5;
+  }
 }
 
 message VideoStopRequest {
@@ -33,16 +36,13 @@ message VideoKeepAliveRequest {
   string requestId = 1;
 }
 
-message VideoStopResponse {
-  bool isStopped = 1;
-}
-
 service VideoStreaming {
   rpc upload(stream Video) returns (google.protobuf.Empty) {};
 }
 
 service VideoRequesting {
   rpc startUpload(VideoConfig) returns (google.protobuf.Empty) {};
+  rpc download(stream VideoConfig) returns (stream Video) {};
   rpc keepAlive(VideoKeepAliveRequest) returns (google.protobuf.Empty) {};
-  rpc stopUpload(VideoStopRequest) returns (VideoStopResponse) {};
+  rpc stopUpload(VideoStopRequest) returns (google.protobuf.Empty) {};
 }
