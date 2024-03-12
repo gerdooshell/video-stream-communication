@@ -275,100 +275,6 @@ func (*VideoConfig_Seconds) isVideoConfig_StartTime() {}
 
 func (*VideoConfig_Timestamp) isVideoConfig_StartTime() {}
 
-type VideoStopRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	RequestId string `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
-}
-
-func (x *VideoStopRequest) Reset() {
-	*x = VideoStopRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *VideoStopRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*VideoStopRequest) ProtoMessage() {}
-
-func (x *VideoStopRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use VideoStopRequest.ProtoReflect.Descriptor instead.
-func (*VideoStopRequest) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *VideoStopRequest) GetRequestId() string {
-	if x != nil {
-		return x.RequestId
-	}
-	return ""
-}
-
-type VideoKeepAliveRequest struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	RequestId string `protobuf:"bytes,1,opt,name=requestId,proto3" json:"requestId,omitempty"`
-}
-
-func (x *VideoKeepAliveRequest) Reset() {
-	*x = VideoKeepAliveRequest{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_src_server_stream_server_proto_msgTypes[4]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *VideoKeepAliveRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*VideoKeepAliveRequest) ProtoMessage() {}
-
-func (x *VideoKeepAliveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_src_server_stream_server_proto_msgTypes[4]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use VideoKeepAliveRequest.ProtoReflect.Descriptor instead.
-func (*VideoKeepAliveRequest) Descriptor() ([]byte, []int) {
-	return file_src_server_stream_server_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *VideoKeepAliveRequest) GetRequestId() string {
-	if x != nil {
-		return x.RequestId
-	}
-	return ""
-}
-
 var File_src_server_stream_server_proto protoreflect.FileDescriptor
 
 var file_src_server_stream_server_proto_rawDesc = []byte{
@@ -404,34 +310,17 @@ var file_src_server_stream_server_proto_rawDesc = []byte{
 	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
 	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x48,
 	0x00, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x0b, 0x0a, 0x09,
-	0x73, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x30, 0x0a, 0x10, 0x56, 0x69, 0x64,
-	0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a,
-	0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49, 0x64, 0x22, 0x35, 0x0a, 0x15, 0x56,
-	0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x12, 0x1c, 0x0a, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x49,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x72, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x49, 0x64, 0x32, 0x3e, 0x0a, 0x0e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61,
-	0x6d, 0x69, 0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x06, 0x75, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x06,
-	0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00,
-	0x28, 0x01, 0x32, 0xea, 0x01, 0x0a, 0x0f, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x35, 0x0a, 0x0b, 0x73, 0x74, 0x61, 0x72, 0x74, 0x55,
-	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x12, 0x26, 0x0a,
-	0x08, 0x64, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65,
-	0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x22,
-	0x00, 0x28, 0x01, 0x30, 0x01, 0x12, 0x3d, 0x0a, 0x09, 0x6b, 0x65, 0x65, 0x70, 0x41, 0x6c, 0x69,
-	0x76, 0x65, 0x12, 0x16, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x4b, 0x65, 0x65, 0x70, 0x41, 0x6c,
-	0x69, 0x76, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x22, 0x00, 0x12, 0x39, 0x0a, 0x0a, 0x73, 0x74, 0x6f, 0x70, 0x55, 0x70, 0x6c, 0x6f,
-	0x61, 0x64, 0x12, 0x11, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x53, 0x74, 0x6f, 0x70, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x42,
-	0x13, 0x5a, 0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74,
-	0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69, 0x6d, 0x65, 0x32, 0x3e, 0x0a, 0x0e, 0x56, 0x69, 0x64,
+	0x65, 0x6f, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x69, 0x6e, 0x67, 0x12, 0x2c, 0x0a, 0x06, 0x75,
+	0x70, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x1a, 0x16, 0x2e,
+	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
+	0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x28, 0x01, 0x32, 0x39, 0x0a, 0x0f, 0x56, 0x69, 0x64,
+	0x65, 0x6f, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x26, 0x0a, 0x08,
+	0x64, 0x6f, 0x77, 0x6e, 0x6c, 0x6f, 0x61, 0x64, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x06, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x22, 0x00,
+	0x28, 0x01, 0x30, 0x01, 0x42, 0x13, 0x5a, 0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76,
+	0x65, 0x72, 0x2d, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 }
 
 var (
@@ -446,32 +335,24 @@ func file_src_server_stream_server_proto_rawDescGZIP() []byte {
 	return file_src_server_stream_server_proto_rawDescData
 }
 
-var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_src_server_stream_server_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_src_server_stream_server_proto_goTypes = []interface{}{
 	(*Video)(nil),                 // 0: Video
 	(*MetaData)(nil),              // 1: MetaData
 	(*VideoConfig)(nil),           // 2: VideoConfig
-	(*VideoStopRequest)(nil),      // 3: VideoStopRequest
-	(*VideoKeepAliveRequest)(nil), // 4: VideoKeepAliveRequest
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(*emptypb.Empty)(nil),         // 6: google.protobuf.Empty
+	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 4: google.protobuf.Empty
 }
 var file_src_server_stream_server_proto_depIdxs = []int32{
 	1, // 0: Video.metaData:type_name -> MetaData
-	5, // 1: MetaData.timestamp:type_name -> google.protobuf.Timestamp
-	5, // 2: VideoConfig.timestamp:type_name -> google.protobuf.Timestamp
+	3, // 1: MetaData.timestamp:type_name -> google.protobuf.Timestamp
+	3, // 2: VideoConfig.timestamp:type_name -> google.protobuf.Timestamp
 	0, // 3: VideoStreaming.upload:input_type -> Video
-	2, // 4: VideoRequesting.startUpload:input_type -> VideoConfig
-	2, // 5: VideoRequesting.download:input_type -> VideoConfig
-	4, // 6: VideoRequesting.keepAlive:input_type -> VideoKeepAliveRequest
-	3, // 7: VideoRequesting.stopUpload:input_type -> VideoStopRequest
-	6, // 8: VideoStreaming.upload:output_type -> google.protobuf.Empty
-	6, // 9: VideoRequesting.startUpload:output_type -> google.protobuf.Empty
-	0, // 10: VideoRequesting.download:output_type -> Video
-	6, // 11: VideoRequesting.keepAlive:output_type -> google.protobuf.Empty
-	6, // 12: VideoRequesting.stopUpload:output_type -> google.protobuf.Empty
-	8, // [8:13] is the sub-list for method output_type
-	3, // [3:8] is the sub-list for method input_type
+	2, // 4: VideoRequesting.download:input_type -> VideoConfig
+	4, // 5: VideoStreaming.upload:output_type -> google.protobuf.Empty
+	0, // 6: VideoRequesting.download:output_type -> Video
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
 	3, // [3:3] is the sub-list for extension extendee
 	0, // [0:3] is the sub-list for field type_name
@@ -519,30 +400,6 @@ func file_src_server_stream_server_proto_init() {
 				return nil
 			}
 		}
-		file_src_server_stream_server_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VideoStopRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_src_server_stream_server_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VideoKeepAliveRequest); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
 	}
 	file_src_server_stream_server_proto_msgTypes[1].OneofWrappers = []interface{}{
 		(*MetaData_Seconds)(nil),
@@ -558,7 +415,7 @@ func file_src_server_stream_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_src_server_stream_server_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   2,
 		},
@@ -690,10 +547,7 @@ var _VideoStreaming_serviceDesc = grpc.ServiceDesc{
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VideoRequestingClient interface {
-	StartUpload(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	Download(ctx context.Context, opts ...grpc.CallOption) (VideoRequesting_DownloadClient, error)
-	KeepAlive(ctx context.Context, in *VideoKeepAliveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type videoRequestingClient struct {
@@ -702,15 +556,6 @@ type videoRequestingClient struct {
 
 func NewVideoRequestingClient(cc grpc.ClientConnInterface) VideoRequestingClient {
 	return &videoRequestingClient{cc}
-}
-
-func (c *videoRequestingClient) StartUpload(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/VideoRequesting/startUpload", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *videoRequestingClient) Download(ctx context.Context, opts ...grpc.CallOption) (VideoRequesting_DownloadClient, error) {
@@ -744,69 +589,21 @@ func (x *videoRequestingDownloadClient) Recv() (*Video, error) {
 	return m, nil
 }
 
-func (c *videoRequestingClient) KeepAlive(ctx context.Context, in *VideoKeepAliveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/VideoRequesting/keepAlive", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *videoRequestingClient) StopUpload(ctx context.Context, in *VideoStopRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/VideoRequesting/stopUpload", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // VideoRequestingServer is the server API for VideoRequesting service.
 type VideoRequestingServer interface {
-	StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error)
 	Download(VideoRequesting_DownloadServer) error
-	KeepAlive(context.Context, *VideoKeepAliveRequest) (*emptypb.Empty, error)
-	StopUpload(context.Context, *VideoStopRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedVideoRequestingServer can be embedded to have forward compatible implementations.
 type UnimplementedVideoRequestingServer struct {
 }
 
-func (*UnimplementedVideoRequestingServer) StartUpload(context.Context, *VideoConfig) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StartUpload not implemented")
-}
 func (*UnimplementedVideoRequestingServer) Download(VideoRequesting_DownloadServer) error {
 	return status.Errorf(codes.Unimplemented, "method Download not implemented")
-}
-func (*UnimplementedVideoRequestingServer) KeepAlive(context.Context, *VideoKeepAliveRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method KeepAlive not implemented")
-}
-func (*UnimplementedVideoRequestingServer) StopUpload(context.Context, *VideoStopRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StopUpload not implemented")
 }
 
 func RegisterVideoRequestingServer(s *grpc.Server, srv VideoRequestingServer) {
 	s.RegisterService(&_VideoRequesting_serviceDesc, srv)
-}
-
-func _VideoRequesting_StartUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VideoConfig)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoRequestingServer).StartUpload(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/VideoRequesting/StartUpload",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoRequestingServer).StartUpload(ctx, req.(*VideoConfig))
-	}
-	return interceptor(ctx, in, info, handler)
 }
 
 func _VideoRequesting_Download_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -835,59 +632,10 @@ func (x *videoRequestingDownloadServer) Recv() (*VideoConfig, error) {
 	return m, nil
 }
 
-func _VideoRequesting_KeepAlive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VideoKeepAliveRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoRequestingServer).KeepAlive(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/VideoRequesting/KeepAlive",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoRequestingServer).KeepAlive(ctx, req.(*VideoKeepAliveRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _VideoRequesting_StopUpload_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VideoStopRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoRequestingServer).StopUpload(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/VideoRequesting/StopUpload",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoRequestingServer).StopUpload(ctx, req.(*VideoStopRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 var _VideoRequesting_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "VideoRequesting",
 	HandlerType: (*VideoRequestingServer)(nil),
-	Methods: []grpc.MethodDesc{
-		{
-			MethodName: "startUpload",
-			Handler:    _VideoRequesting_StartUpload_Handler,
-		},
-		{
-			MethodName: "keepAlive",
-			Handler:    _VideoRequesting_KeepAlive_Handler,
-		},
-		{
-			MethodName: "stopUpload",
-			Handler:    _VideoRequesting_StopUpload_Handler,
-		},
-	},
+	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "download",

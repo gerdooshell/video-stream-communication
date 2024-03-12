@@ -28,21 +28,10 @@ message VideoConfig {
   }
 }
 
-message VideoStopRequest {
-  string requestId = 1;
-}
-
-message VideoKeepAliveRequest {
-  string requestId = 1;
-}
-
 service VideoStreaming {
   rpc upload(stream Video) returns (google.protobuf.Empty) {};
 }
 
 service VideoRequesting {
-  rpc startUpload(VideoConfig) returns (google.protobuf.Empty) {};
   rpc download(stream VideoConfig) returns (stream Video) {};
-  rpc keepAlive(VideoKeepAliveRequest) returns (google.protobuf.Empty) {};
-  rpc stopUpload(VideoStopRequest) returns (google.protobuf.Empty) {};
 }
