@@ -5,19 +5,6 @@ import "google/protobuf/empty.proto";
 
 option go_package = "src/server-stream";
 
-message Video {
-  bytes frame = 1;
-  MetaData metaData = 2;
-}
-
-message MetaData {
-  int32 frequency = 1;
-  oneof startTime {
-    int32 seconds = 4;
-    google.protobuf.Timestamp timestamp = 5;
-  }
-}
-
 message VideoConfig {
   string requestId = 1;
   string imageFormat = 2;
@@ -28,10 +15,23 @@ message VideoConfig {
   }
 }
 
+message VideoFrame {
+  bytes image = 1;
+  FrameMetaData metaData = 2;
+}
+
+message FrameMetaData {
+  int32 frequency = 1;
+  oneof tick {
+    bytes moment = 2;
+    google.protobuf.Timestamp timestamp = 3;
+  }
+}
+
 service VideoStreaming {
-  rpc upload(stream Video) returns (google.protobuf.Empty) {};
+  rpc upload(stream VideoFrame) returns (google.protobuf.Empty) {};
 }
 
 service VideoRequesting {
-  rpc download(stream VideoConfig) returns (stream Video) {};
+  rpc download(stream VideoConfig) returns (stream VideoFrame) {};
 }

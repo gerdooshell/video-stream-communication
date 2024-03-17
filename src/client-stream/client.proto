@@ -1,6 +1,8 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "src/server-stream/server.proto";
 
 option go_package = "src/client-stream";
 
@@ -16,7 +18,7 @@ enum PlaybackAcceleration {
 }
 
 message VideoConfigArchive {
-  int32 id = 1;
+  int32 archiveId = 1;
   int32 resolution = 2;
   PlaybackAcceleration playbackAcceleration = 3;
   optional int32 fromSecond = 4;
@@ -45,4 +47,20 @@ message ArchivedEntityMetaInfo {
   int32 id = 1;
   ArchivedVideoFilter filter = 2;
   int32 maxResolution = 3;
+}
+
+message CameraList {
+  repeated CameraInfo cameras = 1;
+}
+
+message CameraInfo {
+  int32 id = 1;
+  string location = 2;
+}
+
+service ClientVideoStream {
+  rpc GetCameraList(google.protobuf.Empty) returns (CameraList) {};
+  rpc GetArchivedList(ArchiveListRequest) returns (ArchiveListResponse) {};
+  rpc StreamLiveVideo(stream VideoConfigLive) returns (stream VideoFrame) {};
+  rpc StreamArchivedVideo(stream VideoConfigArchive) returns (stream VideoFrame) {};
 }
