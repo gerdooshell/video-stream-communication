@@ -2,7 +2,6 @@ syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
-import "src/server-stream/server.proto";
 
 option go_package = "src/client-stream";
 
@@ -58,9 +57,22 @@ message CameraInfo {
   string location = 2;
 }
 
+message ClientVideoFrame {
+  bytes image = 1;
+  FrameClientMetaData metaData = 2;
+}
+
+message FrameClientMetaData {
+  int32 frequency = 1;
+  oneof tick {
+    bytes moment = 2;
+    google.protobuf.Timestamp timestamp = 3;
+  }
+}
+
 service ClientVideoStream {
   rpc GetCameraList(google.protobuf.Empty) returns (CameraList) {};
   rpc GetArchivedList(ArchiveListRequest) returns (ArchiveListResponse) {};
-  rpc StreamLiveVideo(stream VideoConfigLive) returns (stream VideoFrame) {};
-  rpc StreamArchivedVideo(stream VideoConfigArchive) returns (stream VideoFrame) {};
+  rpc StreamLiveVideo(stream VideoConfigLive) returns (stream ClientVideoFrame) {};
+  rpc StreamArchivedVideo(stream VideoConfigArchive) returns (stream ClientVideoFrame) {};
 }
