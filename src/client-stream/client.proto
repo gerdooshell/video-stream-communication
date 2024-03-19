@@ -7,7 +7,7 @@ import "src/server-stream/server.proto";
 option go_package = "src/client-stream";
 
 message VideoConfigLive {
-  string cameraId = 1;
+  int32 cameraId = 1;
   int32 resolution = 2;
 }
 
