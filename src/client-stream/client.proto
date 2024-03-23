@@ -64,10 +64,7 @@ message ClientVideoFrame {
 
 message FrameClientMetaData {
   int32 frequency = 1;
-  oneof tick {
-    bytes moment = 2;
-    google.protobuf.Timestamp timestamp = 3;
-  }
+  google.protobuf.Timestamp timestamp = 2;
 }
 
 service ClientVideoStream {

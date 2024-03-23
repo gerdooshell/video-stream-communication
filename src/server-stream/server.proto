@@ -8,25 +8,21 @@ message VideoConfig {
   int64 requestId = 1;
   string imageFormat = 2;
   int32 resolution = 3;
-  oneof startTime {
-    int32 seconds = 4;
-    google.protobuf.Timestamp timestamp = 5;
-  }
+  google.protobuf.Timestamp startTime = 4;
+  bool isFrequencyAuto = 5;
 }
 
-message VideoFrame {
+message VideoFrameLive {
   bytes image = 1;
   FrameMetaData metaData = 2;
 }
 
 message FrameMetaData {
   int32 frequency = 1;
-  oneof tick {
-    bytes moment = 2;
-    google.protobuf.Timestamp timestamp = 3;
-  }
+  google.protobuf.Timestamp timestamp = 2;
+  bool isMotionDetected = 3;
 }
 
-service VideoRequesting {
-  rpc download(stream VideoConfig) returns (stream VideoFrame) {};
+service VideoLiveRequesting {
+  rpc download(stream VideoConfig) returns (stream VideoFrameLive) {};
 }
