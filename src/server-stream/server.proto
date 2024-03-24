@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
 option go_package = "src/server-stream";
 
@@ -25,4 +26,9 @@ message FrameMetaData {
 
 service VideoLiveRequesting {
   rpc download(stream VideoConfig) returns (stream VideoFrameLive) {};
+}
+
+service VideoLiveReverse {
+  rpc upload(stream VideoFrameLive) returns (stream VideoConfig) {};
+  rpc checkRequest(VideoConfig) returns (google.protobuf.Empty){};
 }
