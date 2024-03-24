@@ -269,9 +269,9 @@ var file_src_server_stream_server_proto_rawDesc = []byte{
 	0x61, 0x64, 0x12, 0x0f, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x46, 0x72, 0x61, 0x6d, 0x65, 0x4c,
 	0x69, 0x76, 0x65, 0x1a, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69,
 	0x67, 0x22, 0x00, 0x28, 0x01, 0x30, 0x01, 0x12, 0x36, 0x0a, 0x0c, 0x63, 0x68, 0x65, 0x63, 0x6b,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43,
-	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x00, 0x42,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x1a,
+	0x0c, 0x2e, 0x56, 0x69, 0x64, 0x65, 0x6f, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x22, 0x00, 0x42,
 	0x13, 0x5a, 0x11, 0x73, 0x72, 0x63, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x2d, 0x73, 0x74,
 	0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
@@ -302,10 +302,10 @@ var file_src_server_stream_server_proto_depIdxs = []int32{
 	3, // 2: FrameMetaData.timestamp:type_name -> google.protobuf.Timestamp
 	0, // 3: VideoLiveRequesting.download:input_type -> VideoConfig
 	1, // 4: VideoLiveReverse.upload:input_type -> VideoFrameLive
-	0, // 5: VideoLiveReverse.checkRequest:input_type -> VideoConfig
+	4, // 5: VideoLiveReverse.checkRequest:input_type -> google.protobuf.Empty
 	1, // 6: VideoLiveRequesting.download:output_type -> VideoFrameLive
 	0, // 7: VideoLiveReverse.upload:output_type -> VideoConfig
-	4, // 8: VideoLiveReverse.checkRequest:output_type -> google.protobuf.Empty
+	0, // 8: VideoLiveReverse.checkRequest:output_type -> VideoConfig
 	6, // [6:9] is the sub-list for method output_type
 	3, // [3:6] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -493,7 +493,7 @@ var _VideoLiveRequesting_serviceDesc = grpc.ServiceDesc{
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VideoLiveReverseClient interface {
 	Upload(ctx context.Context, opts ...grpc.CallOption) (VideoLiveReverse_UploadClient, error)
-	CheckRequest(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CheckRequest(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*VideoConfig, error)
 }
 
 type videoLiveReverseClient struct {
@@ -535,8 +535,8 @@ func (x *videoLiveReverseUploadClient) Recv() (*VideoConfig, error) {
 	return m, nil
 }
 
-func (c *videoLiveReverseClient) CheckRequest(ctx context.Context, in *VideoConfig, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *videoLiveReverseClient) CheckRequest(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*VideoConfig, error) {
+	out := new(VideoConfig)
 	err := c.cc.Invoke(ctx, "/VideoLiveReverse/checkRequest", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -547,7 +547,7 @@ func (c *videoLiveReverseClient) CheckRequest(ctx context.Context, in *VideoConf
 // VideoLiveReverseServer is the server API for VideoLiveReverse service.
 type VideoLiveReverseServer interface {
 	Upload(VideoLiveReverse_UploadServer) error
-	CheckRequest(context.Context, *VideoConfig) (*emptypb.Empty, error)
+	CheckRequest(context.Context, *emptypb.Empty) (*VideoConfig, error)
 }
 
 // UnimplementedVideoLiveReverseServer can be embedded to have forward compatible implementations.
@@ -557,7 +557,7 @@ type UnimplementedVideoLiveReverseServer struct {
 func (*UnimplementedVideoLiveReverseServer) Upload(VideoLiveReverse_UploadServer) error {
 	return status.Errorf(codes.Unimplemented, "method Upload not implemented")
 }
-func (*UnimplementedVideoLiveReverseServer) CheckRequest(context.Context, *VideoConfig) (*emptypb.Empty, error) {
+func (*UnimplementedVideoLiveReverseServer) CheckRequest(context.Context, *emptypb.Empty) (*VideoConfig, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckRequest not implemented")
 }
 
@@ -592,7 +592,7 @@ func (x *videoLiveReverseUploadServer) Recv() (*VideoFrameLive, error) {
 }
 
 func _VideoLiveReverse_CheckRequest_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(VideoConfig)
+	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -604,7 +604,7 @@ func _VideoLiveReverse_CheckRequest_Handler(srv interface{}, ctx context.Context
 		FullMethod: "/VideoLiveReverse/CheckRequest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoLiveReverseServer).CheckRequest(ctx, req.(*VideoConfig))
+		return srv.(VideoLiveReverseServer).CheckRequest(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

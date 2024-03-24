@@ -30,5 +30,5 @@ service VideoLiveRequesting {
 
 service VideoLiveReverse {
   rpc upload(stream VideoFrameLive) returns (stream VideoConfig) {};
-  rpc checkRequest(VideoConfig) returns (google.protobuf.Empty){};
+  rpc checkRequest(google.protobuf.Empty) returns (VideoConfig){};
 }
