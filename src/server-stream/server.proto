@@ -25,6 +25,10 @@ message FrameMetaData {
   bool isMotionDetected = 3;
 }
 
+message CheckRequest {
+  int32 deviceId = 1;
+}
+
 service VideoLiveRequesting {
   rpc download(stream VideoConfig) returns (stream VideoFrameLive) {};
 }
