@@ -15,7 +15,8 @@ message VideoConfig {
 
 message VideoFrameLive {
   bytes image = 1;
-  FrameMetaData metaData = 2;
+  int64 requestId = 2;
+  FrameMetaData metaData = 3;
 }
 
 message FrameMetaData {
