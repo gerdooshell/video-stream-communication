@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
 
 option go_package = "src/server-stream";
 
@@ -35,5 +34,5 @@ service VideoLiveRequesting {
 
 service VideoLiveReverse {
   rpc upload(stream VideoFrameLive) returns (stream VideoConfig) {};
-  rpc checkRequest(google.protobuf.Empty) returns (VideoConfig){};
+  rpc checkRequest(CheckRequest) returns (VideoConfig){};
 }
